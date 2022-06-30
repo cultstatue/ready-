@@ -1,21 +1,17 @@
+var apiKey = "PEXCtwTSHSAIjA1qUOIJkDGGqhUR7GPo";
 
-
-
-var getUserRepos = function() {
+var getUserRepos = function(city) {
     // format the github api url
-   var apiUrl = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=PEXCtwTSHSAIjA1qUOIJkDGGqhUR7GPo"
-    // var apiUrl = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=PEXCtwTSHSAIjA1qUOIJkDGGqhUR7GPo&stateCode=VA"
-  console.log(apiUrl)
+    var apiUrl = "https://app.ticketmaster.com/discovery/v2/events.json?"  + city + "&appid=" + apiKey;
+  
     // make a get request to url
-    fetch(apiUrl)
-    .then(function(response) {
+    fetch(apiUrl).then(function(response) {
       
-      return response.json()
-      .then(function(data) {
+      return response.json().then(function(data) {
         console.log(data);
       });
     });
   };
   
-  getUserRepos(22202);
+  getUserRepos("Boston");
   
