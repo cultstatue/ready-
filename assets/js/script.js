@@ -1,4 +1,16 @@
 var apiKey = "PEXCtwTSHSAIjA1qUOIJkDGGqhUR7GPo";
+var searchBox = document.querySelector('#user-form');
+var cityInputEl = document.querySelector('#city-input');
+var cityContainerEl = document.querySelector('#city-container');
+
+searchBox.addEventListener("submit", function(event) {
+    event.preventDefault();
+    var cityName = cityInputEl.value.trim().toLowerCase();
+    getEventsApi(cityName);
+
+    console.log(searchBox);
+    console.log(cityName);
+});
 
 var getEventsApi = function(city) {
     // format the github api url
@@ -16,5 +28,7 @@ var getEventsApi = function(city) {
     });
   };
   
-  getEventsApi("Boston");
+  //getEventsApi("Boston");
+
+  // add event listeners to forms
   
