@@ -1,47 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./assets/css/style.css" />
-    <title>P1</title>
-  </head>
+    <title>Project One</title>
 
-  <body class="flex-column bg-light">
-    <header class="mx-auto text-center text-white bg-primary">
-      <h1>Project 1</h1>
-    </header>
-    <main class="weather">
-      <div class="container p-3 row m-1 ">
-        <div class="card justify-content-md-center">
-          <div class="card-body ">
-            <h3 class="card-title">Search for a City: </h3>
-            <form id="user-form" class="form-horizontal my-2">
-            <input type="text" class="form-control my-3" id="city" placeholder="Enter a city" />
-            <button type="button" class="btn btn-primary btn-lg btn-block">Search</button>
-            </form>
+  </head>
+  <body>
+
+    <!-- main section -->
+    <main id="main-container" class="main-container">
+
+      <div id="intro" class="columns is-mobile is-centered">
+        
+        <div class="intro-box column is-4">
+
+          <h1 class="title title-font">ready?</h1>
+
+          <div id="search-box" class="search-box box">
+
+            <div class="content is-size-4">
+
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit eaque vero doloremque praesentium tempora, laboriosam, non magni commodi voluptatem quam autem numquam animi corporis et. Consequuntur fugiat modi molestiae eius.
+
+            </div>
+
+            <div class="field">
+
+              <div class="control">
+
+                <input id="city-input" class="input" type="text" placeholder="enter a city name">
+
+              </div>
+
+            </div>
+
+            <div class="control">
+
+              <button class="button is-fullwidth">go!</button>
+
+            </div>
+    
           </div>
-          <ul class="list-group">
-          </ul>
+        
         </div>
+
       </div>
+
+    </main>
+
+    <!--footer-->
+    <footer class="footer">
+
+      <div class="content has-text-centered">
+
+        <p>
+
+          <strong>Bulma</strong> by <a href="https://jgthms.com">Jeremy Thomas</a>. The source code is licensed
+          <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content
+          is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
+
+        </p>
+
       </div>
       
-    </main>
+    </footer>
+
+    <!-- import scripts-->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery-ui-touch-punch@0.2.3/jquery.ui.touch-punch.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="./assets/js/script.js"></script>
+<<<<<<< HEAD
     <script src="https://maps/googleapis.com/maps/api/js" async defer></script>
+=======
+
+>>>>>>> 46911e89b8a5dca3cfec9e27d9c6e36a12ef644b
   </body>
 </html>
