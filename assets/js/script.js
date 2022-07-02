@@ -35,7 +35,7 @@ var getEventsApi = function (city) {
 
             return response.json()
                 .then(function (data) {
-                    //displayEvents(data);
+                    displayEvents(data);
                 });
         });
 };
