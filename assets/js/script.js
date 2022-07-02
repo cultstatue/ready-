@@ -5,6 +5,15 @@ var cityContainerEl = document.querySelector('#city-container');
 var mainContainerEl = document.querySelector('#main-container');
 
 
+// function to convert unix time to a date
+var convertDate = function (unixInput) {
+    var milliseconds = unixInput * 1000;
+    var dateObject = new Date(milliseconds);
+    var parseDateObject = dateObject.toLocaleDateString();
+    return parseDateObject;
+}
+
+
 searchBox.addEventListener("submit", function (event) {
     event.preventDefault();
     var cityName = cityInputEl.value.trim().toLowerCase();
@@ -26,7 +35,7 @@ var getEventsApi = function (city) {
 
             return response.json()
                 .then(function (data) {
-                    displayEvents(data);
+                    //displayEvents(data);
                 });
         });
 };
@@ -70,6 +79,7 @@ var getWeatherdata = function (lat, lon, cityName) {
             response.json().then(function (data) {
 
                 console.log(data)
+                displayWeather(data);
 
             });
         } else {
@@ -83,15 +93,28 @@ var getWeatherdata = function (lat, lon, cityName) {
             alert("Unable to connect to OpenWeather");
 
         });
-}
+};
 
 var displayEvents = function (eventData) {
     console.log(eventData);
     for (var i = 0; i < eventData._embedded.events.length; i++) {
         var eventCard = document.createElement("div");
         eventCard.className = "card";
-        eventCard.innerHTML = "<div class='card-image'><figure class='image is-4by3'><img src=" + eventData._embedded.events[i].images[0].url + " alt='Placeholder image'></figure></div><div class='content'>Name of event: " + eventData._embedded.events[i].name + " <br> Date of event: " + eventData._embedded.events[i].dates.start.localDate +" <br> Event Type: " + eventData._embedded.events[i]._embedded.venues[0].address.line1 + " <br> Event Type: " + eventData._embedded.events[i].priceRanges[0].min + "-" + eventData._embedded.events[i].priceRanges[0].max +" <br> buy your tickets here: <a href=" + eventData._embedded.events[i].url + ">Click here </a> </div></div>";
-        
-        mainContainerEl.appendChild(eventCard); 
+        eventCard.innerHTML = "<div class='card-image'><figure class='image is-4by3'><img src=" + eventData._embedded.events[i].images[0].url + " alt='Placeholder image'></figure></div><div class='content'>Name of event: " + eventData._embedded.events[i].name + " <br> Date of event: " + eventData._embedded.events[i].dates.start.localDate + " <br> Event Type: " + eventData._embedded.events[i]._embedded.venues[0].address.line1 + " <br> Event Type: " + eventData._embedded.events[i].priceRanges[0].min + "-" + eventData._embedded.events[i].priceRanges[0].max + " <br> buy your tickets here: <a href=" + eventData._embedded.events[i].url + ">Click here </a> </div></div>";
+
+        mainContainerEl.appendChild(eventCard);
     }
+};
+
+var displayWeather = function (weatherData) {
+    console.log(weatherData);
+    for (var i = 0; i < weatherData.daily.length; i++) {
+        var weatherCard = document.createElement("div");
+        weatherCard.className = "card";
+        weatherCard.innerHTML = "<div class='card-image'><figure class='image is-4by3'><img src=http://openweathermap.org/img/wn/" + weatherData.daily[i].weather[0].icon + '@2x.png' + " alt='Placeholder image'></figure></div><div class='content'>Date: " + convertDate(weatherData.daily[i].dt) + " <br> Temperature: " + weatherData.daily[i].temp.min + " - " + weatherData.daily[i].temp.max + " <br> Feels like: " + weatherData.daily[i].feels_like.day + " - " + weatherData.daily[i].feels_like.night + " <br> Humidity: " + weatherData.daily[i].humidity + " <br> UV index: " + weatherData.daily[i].uvi + " <br> Description: " + weatherData.daily[i].weather[0].description + "</div></div>";
+
+        mainContainerEl.appendChild(weatherCard);
+    }
+
 }
+
