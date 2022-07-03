@@ -23,16 +23,6 @@ var removeChildren = function (parent) {
   }
 
 
-searchBox.addEventListener("submit", function (event) {
-    event.preventDefault();
-    // converts city name to lower case
-    var cityName = cityInputEl.value.trim().toLowerCase();
-    //getEventsApi(cityName);
-    getGeoData(cityName);
-
-    console.log(searchBox);
-    console.log(cityName);
-});
 
 // function to get weather info from location
 var getWeatherdata = function (lat, lon, cityName) {
@@ -93,19 +83,15 @@ var getEventsApi = function (city, lon, lat) {
 var createNavBar = function () {
     console.log("Hello");
     var navBar = document.createElement("nav");
-    navBar.classList.add('navbar');
+    navBar.classList.add('navbar', 'is-primary');
     navBar.setAttribute("role", "navigation");
     navBar.setAttribute("aria-label", "main-navigation");
     navBar.innerHTML = "<div class='navbar-brand'>" +
-    "<a class='navbar-item' href='https://bulma.io'>" +
-        "<img src='https://bulma.io/images/bulma-logo.png' width='112' height='28'></a>" +
+    "<a class='navbar-item page-font' href='/'>Ready?</a>" +
 
-    "<a role='button' class='navbar-burger' aria-label='menu' aria-expanded='false' data-target='navbarBasicExample'>" +
-        "<span aria-hidden='true'></span><span aria-hidden='true'></span><span aria-hidden='true'></span></a></div>" +
+    
 
-    "<div id='navbarBasicExample' class='navbar-menu'><div class='navbar-start'>" +
-        "<a class='navbar-item'>Home</a>" +
-
+    "<div id='navbarBasicExample' class='navbar-menu is-active'><div class='navbar-start'>" +
         "<div class='navbar-item has-dropdown is-hoverable'>" +
             "<a class='navbar-link'>More</a>" +
 
@@ -113,21 +99,19 @@ var createNavBar = function () {
                 "<a class='navbar-item'>About</a>" +
                 "<a class='navbar-item'>Jobs</a>" +
                 "<hr class='navbar-divider'>" +
-                "<a class='navbar-item'>Report an issue</a></div></div></div>"
+                "<a class='navbar-item'>Report an issue</a></div></div></div>" +
 
     "<div class='navbar-end'>" +
         "<div class='navbar-item'>" +
-            "<div class='buttons'>" +
-                "<a class='button is-primary'>" +
-                    "<strong>Sign up</strong></a>"+
-                "<a class='button is-light'>" +
-                    "Log in</a>"
-            "</div>" +
+        " <form id='nav-form'>" +
+        "<input class='input is-rounded' type='text' placeholder='Search'>" +
+        "</form>" +
         "</div>" +
     "</div>" +
 "</div>"
     headerContentEl.appendChild(navBar);
-}
+
+};
 
 
 var getGeoData = function (cityName) {
@@ -196,5 +180,29 @@ var displayWeather = function (weatherData) {
     }
     mainContainerEl.prepend(weatherContainerEl);
 
-}
+};
+
+
+searchBox.addEventListener("submit", function (event) {
+    event.preventDefault();
+    // converts city name to lower case
+    var cityName = cityInputEl.value.trim().toLowerCase();
+    //getEventsApi(cityName);
+    getGeoData(cityName);
+
+    console.log(searchBox);
+    console.log(cityName);
+});
+
+headerContentEl.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    var navForm = document.querySelector('#nav-form');
+    console.log(navForm.value);
+    var navCityName = navForm.value.trim().toLowerCase();
+    getGeoData(navCityName);
+    console.log("submit");
+    
+
+});
 

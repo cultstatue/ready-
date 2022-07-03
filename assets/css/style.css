@@ -1,12 +1,14 @@
-
-
 body {
 
     background-color: white;
     height: 100vh;
     color: var(--color-four);
 
-  }
+}
+
+.page-font {
+    font-family: 'Poppins', sans-serif;
+}
 
 .main-container {
 
@@ -33,7 +35,7 @@ body {
 
 }
 
-.events-container{
+.events-container {
     margin: 20px;
 }
 
