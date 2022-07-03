@@ -5,6 +5,7 @@ var cityContainerEl = document.querySelector('#city-container');
 var mainContainerEl = document.querySelector('#main-container');
 
 
+
 // function to convert unix time to a date
 var convertDate = function (unixInput) {
     var milliseconds = unixInput * 1000;
@@ -25,54 +26,6 @@ searchBox.addEventListener("submit", function (event) {
     console.log(cityName);
 });
 
-<<<<<<< HEAD
-var getEventsApi = function (city) {
-    // format the ticketmaster api url
-    var apiUrl = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=" + apiKey + "&city=" + city;
-    console.log(apiUrl)
-    // make a get request to url
-    fetch(apiUrl)
-        .then(function (response) {
-
-            return response.json()
-                .then(function (data) {
-                    displayEvents(data);
-                });
-        });
-};
-
-
-var getGeoData = function (cityName) {
-    // format the openweathermap api to look for zip codes 
-    var apiUrl = "https://api.openweathermap.org/geo/1.0/zip?zip=" + cityName + ",US&limit=1&appid=f36d17786468fcf6dab864e03af92392";
-
-    fetch(apiUrl)
-        .then(function (response) {
-            response.json().then(function (data) {
-
-                console.log(data)
-
-                if (data === undefined || data.length == 0) {
-
-                    alert("City location not found")
-                    return false;
-
-                } else {
-
-                    var cityNameState = data.name;
-                    var cityLat = data.lat;
-                    var cityLon = data.lon;
-
-                    getWeatherdata(cityLat, cityLon, cityNameState);
-                    getEventsApi(cityNameState);
-
-                }
-            })
-        });
-};
-
-=======
->>>>>>> 0163521 (added error handling for no events being found in a location)
 // function to get weather info from location
 var getWeatherdata = function (lat, lon, cityName) {
 
@@ -99,9 +52,6 @@ var getWeatherdata = function (lat, lon, cityName) {
         });
 };
 
-<<<<<<< HEAD
-// function to display events from location
-=======
 var getEventsApi = function (city, lon, lat) {
     // format the github api url
     var apiUrl = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=" + apiKey + "&city=" + city;
@@ -159,29 +109,50 @@ var getGeoData = function (cityName) {
 };
 
 
->>>>>>> 0163521 (added error handling for no events being found in a location)
 var displayEvents = function (eventData) {
     console.log(eventData);
+    removeChildren(mainContainerEl);
+    var eventsContainerEl = document.createElement('div');
+    eventsContainerEl.classList.add('columns', 'is-mobile', 'is-multiline', 'events-container');   
+    mainContainerEl.appendChild(eventsContainerEl);
+
     // loops through objects based on event data we concluded to display
     for (var i = 0; i < eventData._embedded.events.length; i++) {
+        var columnDiv = document.createElement("div");
+        columnDiv.classList.add('column', 'is-3');
+        eventsContainerEl.appendChild(columnDiv);
         var eventCard = document.createElement("div");
-        eventCard.className = "card";
+        eventCard.classList.add('card');
         eventCard.innerHTML = "<div class='card-image'><figure class='image is-4by3'><img src=" + eventData._embedded.events[i].images[0].url + " alt='Placeholder image'></figure></div><div class='content'>Name of event: " + eventData._embedded.events[i].name + " <br> Date of event: " + eventData._embedded.events[i].dates.start.localDate + " <br> Event Type: " + eventData._embedded.events[i]._embedded.venues[0].address.line1 + " <br> Event Type: " + eventData._embedded.events[i].priceRanges[0].min + "-" + eventData._embedded.events[i].priceRanges[0].max + " <br> buy your tickets here: <a href=" + eventData._embedded.events[i].url + ">Click here </a> </div></div>";
 
-        mainContainerEl.appendChild(eventCard);
+        columnDiv.appendChild(eventCard);
     }
 };
 
+// function to remove all parents children
+var removeChildren = function (parent) {
+  while(parent.firstChild) {
+    parent.removeChild(parent.firstChild);
+  }
+}
+
 var displayWeather = function (weatherData) {
     console.log(weatherData);
+    var weatherContainerEl = document.createElement('div');
+    weatherContainerEl.classList.add('columns', 'is-mobile', 'is-multiline', 'weather-container');   
+    mainContainerEl.appendChild(weatherContainerEl);
         // loops through objects based on event data we concluded to display
     for (var i = 0; i < weatherData.daily.length; i++) {
+        var weatherDiv = document.createElement("div");
+        weatherDiv.classList.add('column', 'is-3');
+        weatherContainerEl.appendChild(weatherDiv);
         var weatherCard = document.createElement("div");
         weatherCard.className = "card";
-        weatherCard.innerHTML = "<div class='card-image'><figure class='image is-4by3'><img src=http://openweathermap.org/img/wn/" + weatherData.daily[i].weather[0].icon + '@2x.png' + " alt='Placeholder image'></figure></div><div class='content'>Date: " + convertDate(weatherData.daily[i].dt) + " <br> Temperature: " + weatherData.daily[i].temp.min + " - " + weatherData.daily[i].temp.max + " <br> Feels like: " + weatherData.daily[i].feels_like.day + " - " + weatherData.daily[i].feels_like.night + " <br> Humidity: " + weatherData.daily[i].humidity + " <br> UV index: " + weatherData.daily[i].uvi + " <br> Description: " + weatherData.daily[i].weather[0].description + "</div></div>";
+        weatherCard.innerHTML = "<div class='card-image'><figure class='image is-64x64'><img src=http://openweathermap.org/img/wn/" + weatherData.daily[i].weather[0].icon + '@2x.png' + " alt='Placeholder image'></figure></div><div class='content'>Date: " + convertDate(weatherData.daily[i].dt) + " <br> Temperature: " + weatherData.daily[i].temp.min + " - " + weatherData.daily[i].temp.max + " <br> Feels like: " + weatherData.daily[i].feels_like.day + " - " + weatherData.daily[i].feels_like.night + " <br> Humidity: " + weatherData.daily[i].humidity + " <br> UV index: " + weatherData.daily[i].uvi + " <br> Description: " + weatherData.daily[i].weather[0].description + "</div></div>";
 
-        mainContainerEl.appendChild(weatherCard);
+        weatherDiv.appendChild(weatherCard);
     }
+    mainContainerEl.prepend(weatherContainerEl);
 
 }
 
