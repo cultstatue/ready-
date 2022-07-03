@@ -25,6 +25,7 @@ searchBox.addEventListener("submit", function (event) {
     console.log(cityName);
 });
 
+<<<<<<< HEAD
 var getEventsApi = function (city) {
     // format the ticketmaster api url
     var apiUrl = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=" + apiKey + "&city=" + city;
@@ -70,6 +71,8 @@ var getGeoData = function (cityName) {
         });
 };
 
+=======
+>>>>>>> 0163521 (added error handling for no events being found in a location)
 // function to get weather info from location
 var getWeatherdata = function (lat, lon, cityName) {
 
@@ -96,7 +99,67 @@ var getWeatherdata = function (lat, lon, cityName) {
         });
 };
 
+<<<<<<< HEAD
 // function to display events from location
+=======
+var getEventsApi = function (city, lon, lat) {
+    // format the github api url
+    var apiUrl = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=" + apiKey + "&city=" + city;
+    // var apiUrl = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=PEXCtwTSHSAIjA1qUOIJkDGGqhUR7GPo&postalCode="
+    console.log(apiUrl)
+    // make a get request to url
+    fetch(apiUrl)
+        .then(function (response) {
+
+            return response.json()
+                .then(function (data) {
+
+                    if(!data._embedded) {
+
+                        alert("events for this location were not found!")
+
+                        return false;
+                    }
+
+                    getWeatherdata(lat, lon, city);
+
+                    displayEvents(data);
+
+                    
+            });
+    });
+};
+
+
+var getGeoData = function (cityName) {
+    var apiUrl = "https://api.openweathermap.org/geo/1.0/zip?zip=" + cityName + ",US&limit=1&appid=f36d17786468fcf6dab864e03af92392";
+
+    fetch(apiUrl)
+        .then(function (response) {
+            response.json().then(function (data) {
+
+                console.log(data)
+
+                if (data === undefined || data.length == 0) {
+
+                    alert("City location not found")
+                    return false;
+
+                } else {
+
+                    var cityNameState = data.name;
+                    var cityLat = data.lat;
+                    var cityLon = data.lon;
+
+                    getEventsApi(cityNameState, cityLon, cityLat);
+
+                }
+            })
+        });
+};
+
+
+>>>>>>> 0163521 (added error handling for no events being found in a location)
 var displayEvents = function (eventData) {
     console.log(eventData);
     // loops through objects based on event data we concluded to display
