@@ -16,6 +16,7 @@ var convertDate = function (unixInput) {
 
 searchBox.addEventListener("submit", function (event) {
     event.preventDefault();
+    // converts city name to lower case
     var cityName = cityInputEl.value.trim().toLowerCase();
     //getEventsApi(cityName);
     getGeoData(cityName);
@@ -25,9 +26,8 @@ searchBox.addEventListener("submit", function (event) {
 });
 
 var getEventsApi = function (city) {
-    // format the github api url
+    // format the ticketmaster api url
     var apiUrl = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=" + apiKey + "&city=" + city;
-    // var apiUrl = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=PEXCtwTSHSAIjA1qUOIJkDGGqhUR7GPo&postalCode="
     console.log(apiUrl)
     // make a get request to url
     fetch(apiUrl)
@@ -42,6 +42,7 @@ var getEventsApi = function (city) {
 
 
 var getGeoData = function (cityName) {
+    // format the openweathermap api to look for zip codes 
     var apiUrl = "https://api.openweathermap.org/geo/1.0/zip?zip=" + cityName + ",US&limit=1&appid=f36d17786468fcf6dab864e03af92392";
 
     fetch(apiUrl)
@@ -95,8 +96,10 @@ var getWeatherdata = function (lat, lon, cityName) {
         });
 };
 
+// function to display events from location
 var displayEvents = function (eventData) {
     console.log(eventData);
+    // loops through objects based on event data we concluded to display
     for (var i = 0; i < eventData._embedded.events.length; i++) {
         var eventCard = document.createElement("div");
         eventCard.className = "card";
@@ -108,6 +111,7 @@ var displayEvents = function (eventData) {
 
 var displayWeather = function (weatherData) {
     console.log(weatherData);
+        // loops through objects based on event data we concluded to display
     for (var i = 0; i < weatherData.daily.length; i++) {
         var weatherCard = document.createElement("div");
         weatherCard.className = "card";
