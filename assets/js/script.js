@@ -3,6 +3,7 @@ var searchBox = document.querySelector('#user-form');
 var cityInputEl = document.querySelector('#city-input');
 var cityContainerEl = document.querySelector('#city-container');
 var mainContainerEl = document.querySelector('#main-container');
+var headerContentEl = document.querySelector('#header');
 
 
 
@@ -13,6 +14,13 @@ var convertDate = function (unixInput) {
     var parseDateObject = dateObject.toLocaleDateString();
     return parseDateObject;
 }
+
+// function to remove all parents children
+var removeChildren = function (parent) {
+    while(parent.firstChild) {
+      parent.removeChild(parent.firstChild);
+    }
+  }
 
 
 searchBox.addEventListener("submit", function (event) {
@@ -66,7 +74,7 @@ var getEventsApi = function (city, lon, lat) {
 
                     if(!data._embedded) {
 
-                        alert("events for this location were not found!")
+                        alert("events for this location were not found!");
 
                         return false;
                     }
@@ -75,10 +83,51 @@ var getEventsApi = function (city, lon, lat) {
 
                     displayEvents(data);
 
+                    createNavBar();
+
                     
             });
     });
 };
+
+var createNavBar = function () {
+    console.log("Hello");
+    var navBar = document.createElement("nav");
+    navBar.classList.add('navbar');
+    navBar.setAttribute("role", "navigation");
+    navBar.setAttribute("aria-label", "main-navigation");
+    navBar.innerHTML = "<div class='navbar-brand'>" +
+    "<a class='navbar-item' href='https://bulma.io'>" +
+        "<img src='https://bulma.io/images/bulma-logo.png' width='112' height='28'></a>" +
+
+    "<a role='button' class='navbar-burger' aria-label='menu' aria-expanded='false' data-target='navbarBasicExample'>" +
+        "<span aria-hidden='true'></span><span aria-hidden='true'></span><span aria-hidden='true'></span></a></div>" +
+
+    "<div id='navbarBasicExample' class='navbar-menu'><div class='navbar-start'>" +
+        "<a class='navbar-item'>Home</a>" +
+
+        "<div class='navbar-item has-dropdown is-hoverable'>" +
+            "<a class='navbar-link'>More</a>" +
+
+            "<div class='navbar-dropdown'>" +
+                "<a class='navbar-item'>About</a>" +
+                "<a class='navbar-item'>Jobs</a>" +
+                "<hr class='navbar-divider'>" +
+                "<a class='navbar-item'>Report an issue</a></div></div></div>"
+
+    "<div class='navbar-end'>" +
+        "<div class='navbar-item'>" +
+            "<div class='buttons'>" +
+                "<a class='button is-primary'>" +
+                    "<strong>Sign up</strong></a>"+
+                "<a class='button is-light'>" +
+                    "Log in</a>"
+            "</div>" +
+        "</div>" +
+    "</div>" +
+"</div>"
+    headerContentEl.appendChild(navBar);
+}
 
 
 var getGeoData = function (cityName) {
@@ -128,13 +177,6 @@ var displayEvents = function (eventData) {
         columnDiv.appendChild(eventCard);
     }
 };
-
-// function to remove all parents children
-var removeChildren = function (parent) {
-  while(parent.firstChild) {
-    parent.removeChild(parent.firstChild);
-  }
-}
 
 var displayWeather = function (weatherData) {
     console.log(weatherData);
