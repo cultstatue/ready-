@@ -125,7 +125,7 @@ var createNavBar = function () {
         "</form>" +
         "</div>" +
     "</div>" +
-"</div>"
+    "</div>"
 
     headerContentEl.appendChild(navBar);
 
@@ -143,15 +143,121 @@ var displayEvents = function (eventData) {
 
     // loops through objects based on event data we concluded to display
     for (var i = 0; i < eventData._embedded.events.length; i++) {
+
         var columnDiv = document.createElement("div");
         columnDiv.classList.add('column', 'is-3');
         eventsContainerEl.appendChild(columnDiv);
         
         var eventCard = document.createElement("div");
-        eventCard.classList.add('card');
-        eventCard.innerHTML = "<div class='card-image'><figure class='image is-4by3'><img src=" + eventData._embedded.events[i].images[0].url + " alt='Placeholder image'></figure></div><div class='content'>Name of event: " + eventData._embedded.events[i].name + " <br> Date of event: " + eventData._embedded.events[i].dates.start.localDate + " <br> Event Type: " + eventData._embedded.events[i]._embedded.venues[0].address.line1 + " <br> Event Type: " + eventData._embedded.events[i].priceRanges[0].min + "-" + eventData._embedded.events[i].priceRanges[0].max + " <br> buy your tickets here: <a href=" + eventData._embedded.events[i].url + ">Click here </a> </div></div>";
-
+        eventCard.classList.add('card', 'event-card');
         columnDiv.appendChild(eventCard);
+
+        var cardImageDiv = document.createElement("div");
+        cardImageDiv.classList.add('card-image');
+        eventCard.appendChild(cardImageDiv);
+
+        var cardImage = document.createElement("figure");
+        cardImage.classList.add('image', 'is-4by3');
+
+        if (!eventData._embedded.events[i].images[0].url) {
+
+            removeChildren(eventCard);
+            eventCard.textContent = "event image not found";
+
+        } else {
+
+            cardImage.innerHTML = "<img src="
+            + eventData._embedded.events[i].images[0].url + 
+            " alt='event image provided from ticketmaster'>"
+
+            cardImageDiv.appendChild(cardImage);
+        };
+
+        var cardContent = document.createElement("div");
+        cardContent.classList.add('content');
+        eventCard.appendChild(cardContent);
+
+        var eventTitle = document.createElement("p");
+        eventTitle.classList.add('title', 'is-4');
+
+        if (!eventData._embedded.events[i].name === undefined ) {
+
+            eventTitle.innerText = "Event Name not found"
+
+        } else {
+
+            eventTitle.innerText = eventData._embedded.events[i].name
+
+        }
+
+        cardContent.appendChild(eventTitle);
+
+        var eventDate = document.createElement("p")
+        eventDate.classList.add('subtitle', 'is-6')
+
+        if (eventData._embedded.events[i].dates.start.localDate === undefined ) {
+
+            eventDate.innerText = "Date not provided";
+
+        } else {
+
+            eventDate.innerText = eventData._embedded.events[i].dates.start.localDate;
+        };
+
+        cardContent.appendChild(eventDate);
+
+        var eventAddress = document.createElement("p")
+        eventAddress.classList.add('is-6')
+
+        if (eventData._embedded.events[i]._embedded.venues[0].address.line1 === undefined ) {
+
+            eventAddress.innerText = "address not provided"
+
+        } else {
+
+            eventAddress.innerText = eventData._embedded.events[i]._embedded.venues[0].address.line1;
+
+        }
+
+        cardContent.appendChild(eventAddress);
+
+        var eventPrices = document.createElement("span");
+        eventPrices.classList.add('tag', 'is-success')
+
+        if (eventData._embedded.events[i].priceRanges === undefined || eventData._embedded.events[i].priceRanges === undefined ) {
+
+            eventPrices.innerText = " ticket price range not provided"
+
+        } else {
+
+            eventPrices.innerText = "$" + eventData._embedded.events[i].priceRanges[0].min + " - $" + eventData._embedded.events[i].priceRanges[0].max;
+
+        }
+
+       cardContent.appendChild(eventPrices);
+
+       var buyButton = document.createElement("button");
+       buyButton.classList.add('button', 'is-responsive', 'is-fullwidth', 'is-primary')
+
+        if (eventData._embedded.events[i].url === undefined ) {
+
+            buyButton.innerText = "purchase link not provided"
+
+            cardContent.appendChild(buyButton);
+
+        } else {
+
+            var buyLink = document.createElement("a")
+            buyLink.href = eventData._embedded.events[i].url
+
+            cardContent.appendChild(buyLink);
+
+            buyButton.innerText = "Purchase Tickets"
+
+            buyLink.appendChild(buyButton);
+
+        }
+
     }
 };
 
