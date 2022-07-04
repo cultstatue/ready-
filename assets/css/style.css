@@ -38,15 +38,17 @@ body {
 
 }
 
+
 .events-container {
     margin: 20px;
 }
 
-.weather-container {
-    margin: 20px;
+.event-card-content {
+
+    padding: 3px;
 }
 
-.navbar-end {
 
-    text-align: left;
+.weather-container {
+    margin: 20px;
 }

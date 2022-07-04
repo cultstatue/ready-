@@ -36,13 +36,23 @@ var getWeatherdata = function (lat, lon, cityName) {
             });
         } else {
 
-            alert('City location not found');
+            Bulma().alert({
+                type: 'danger',
+                title: 'Error',
+                body: 'City location not found.',
+                confirm: 'Ok',
+            });
 
         }
     })
         .catch(function (error) {
 
-            alert("Unable to connect to OpenWeather");
+            Bulma().alert({
+                type: 'danger',
+                title: 'Error',
+                body: 'Unable to connect to OpenWeather.',
+                confirm: 'Ok',
+            });
 
         });
 };
@@ -54,15 +64,19 @@ var getEventsApi = function (city, lon, lat) {
     var apiUrl = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=" + apiKey + "&city=" + city;
     
     // make a get request to url
-    fetch(apiUrl)
-    .then(function (response) {
+    fetch(apiUrl).then(function (response) {
 
-    return response.json()
-        .then(function (data) {
+    if(response.ok) {
+    response.json().then(function (data) {
 
             if(!data._embedded) {
 
-                alert("events for this location were not found!");
+                Bulma().alert({
+                    type: 'danger',
+                    title: 'Error',
+                    body: 'No events found for this location.',
+                    confirm: 'Ok',
+                });
 
                 return false;
             }
@@ -74,7 +88,12 @@ var getEventsApi = function (city, lon, lat) {
             createNavBar();
 
         });
-    });
+        
+        
+    } 
+        
+ });
+   
 };
 
 
@@ -90,7 +109,12 @@ var getGeoData = function (cityName) {
 
                 if (data === undefined || data.length == 0) {
 
-                    alert("City location not found")
+                    Bulma().alert({
+                        type: 'danger',
+                        title: 'Error',
+                        body: 'Location not found',
+                        confirm: 'Ok',
+                    });
                     return false;
 
                 } else {
@@ -174,7 +198,7 @@ var displayEvents = function (eventData) {
         };
 
         var cardContent = document.createElement("div");
-        cardContent.classList.add('content');
+        cardContent.classList.add('content', 'event-card-content');
         eventCard.appendChild(cardContent);
 
         var eventTitle = document.createElement("p");
