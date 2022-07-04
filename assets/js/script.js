@@ -5,8 +5,6 @@ var cityContainerEl = document.querySelector('#city-container');
 var mainContainerEl = document.querySelector('#main-container');
 var headerContentEl = document.querySelector('#header');
 
-
-
 // function to convert unix time to a date
 var convertDate = function (unixInput) {
     var milliseconds = unixInput * 1000;
@@ -21,8 +19,6 @@ var removeChildren = function (parent) {
       parent.removeChild(parent.firstChild);
     }
   }
-
-
 
 // function to get weather info from location
 var getWeatherdata = function (lat, lon, cityName) {
@@ -53,8 +49,6 @@ var getWeatherdata = function (lat, lon, cityName) {
 var getEventsApi = function (city, lon, lat) {
     // format the github api url
     var apiUrl = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=" + apiKey + "&city=" + city;
-    // var apiUrl = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=PEXCtwTSHSAIjA1qUOIJkDGGqhUR7GPo&postalCode="
-    console.log(apiUrl)
     // make a get request to url
     fetch(apiUrl)
         .then(function (response) {
@@ -81,15 +75,13 @@ var getEventsApi = function (city, lon, lat) {
 };
 
 var createNavBar = function () {
-    console.log("Hello");
+    
     var navBar = document.createElement("nav");
     navBar.classList.add('navbar', 'is-primary');
     navBar.setAttribute("role", "navigation");
     navBar.setAttribute("aria-label", "main-navigation");
     navBar.innerHTML = "<div class='navbar-brand'>" +
     "<a class='navbar-item page-font' href='/'>Ready?</a>" +
-
-    
 
     "<div id='navbarBasicExample' class='navbar-menu is-active'><div class='navbar-start'>" +
         "<div class='navbar-item has-dropdown is-hoverable'>" +
@@ -104,11 +96,12 @@ var createNavBar = function () {
     "<div class='navbar-end'>" +
         "<div class='navbar-item'>" +
         " <form id='nav-form'>" +
-        "<input class='input is-rounded' type='text' placeholder='Search'>" +
+        "<input class='input is-rounded' id='nav-city-name' type='text' placeholder='Search'>" +
         "</form>" +
         "</div>" +
     "</div>" +
 "</div>"
+
     headerContentEl.appendChild(navBar);
 
 };
@@ -143,8 +136,10 @@ var getGeoData = function (cityName) {
 
 
 var displayEvents = function (eventData) {
+
     console.log(eventData);
     removeChildren(mainContainerEl);
+
     var eventsContainerEl = document.createElement('div');
     eventsContainerEl.classList.add('columns', 'is-mobile', 'is-multiline', 'events-container');   
     mainContainerEl.appendChild(eventsContainerEl);
@@ -197,7 +192,7 @@ searchBox.addEventListener("submit", function (event) {
 headerContentEl.addEventListener('submit', function(event) {
     event.preventDefault();
 
-    var navForm = document.querySelector('#nav-form');
+    var navForm = document.querySelector('#nav-city-name');
     console.log(navForm.value);
     var navCityName = navForm.value.trim().toLowerCase();
     getGeoData(navCityName);
