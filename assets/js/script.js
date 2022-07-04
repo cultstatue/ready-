@@ -1,3 +1,4 @@
+// define hard coded elements
 var apiKey = "PEXCtwTSHSAIjA1qUOIJkDGGqhUR7GPo";
 var searchBox = document.querySelector('#user-form');
 var cityInputEl = document.querySelector('#city-input');
@@ -46,67 +47,38 @@ var getWeatherdata = function (lat, lon, cityName) {
         });
 };
 
+// function to access ticketmaster api
 var getEventsApi = function (city, lon, lat) {
+
     // format the github api url
     var apiUrl = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=" + apiKey + "&city=" + city;
+    
     // make a get request to url
     fetch(apiUrl)
-        .then(function (response) {
+    .then(function (response) {
 
-            return response.json()
-                .then(function (data) {
+    return response.json()
+        .then(function (data) {
 
-                    if(!data._embedded) {
+            if(!data._embedded) {
 
-                        alert("events for this location were not found!");
+                alert("events for this location were not found!");
 
-                        return false;
-                    }
+                return false;
+            }
 
-                    getWeatherdata(lat, lon, city);
+            getWeatherdata(lat, lon, city);
 
-                    displayEvents(data);
+            displayEvents(data);
 
-                    createNavBar();
+            createNavBar();
 
-                    
-            });
+        });
     });
 };
 
-var createNavBar = function () {
-    
-    var navBar = document.createElement("nav");
-    navBar.classList.add('navbar', 'is-primary');
-    navBar.setAttribute("role", "navigation");
-    navBar.setAttribute("aria-label", "main-navigation");
-    navBar.innerHTML = "<div class='navbar-brand'>" +
-    "<a class='navbar-item page-font' href='/'>Ready?</a>" +
 
-    "<div id='navbarBasicExample' class='navbar-menu is-active'><div class='navbar-start'>" +
-        "<div class='navbar-item has-dropdown is-hoverable'>" +
-            "<a class='navbar-link'>More</a>" +
-
-            "<div class='navbar-dropdown'>" +
-                "<a class='navbar-item'>About</a>" +
-                "<a class='navbar-item'>Jobs</a>" +
-                "<hr class='navbar-divider'>" +
-                "<a class='navbar-item'>Report an issue</a></div></div></div>" +
-
-    "<div class='navbar-end'>" +
-        "<div class='navbar-item'>" +
-        " <form id='nav-form'>" +
-        "<input class='input is-rounded' id='nav-city-name' type='text' placeholder='Search'>" +
-        "</form>" +
-        "</div>" +
-    "</div>" +
-"</div>"
-
-    headerContentEl.appendChild(navBar);
-
-};
-
-
+// function to get geolocation based on entered zip code
 var getGeoData = function (cityName) {
     var apiUrl = "https://api.openweathermap.org/geo/1.0/zip?zip=" + cityName + ",US&limit=1&appid=f36d17786468fcf6dab864e03af92392";
 
@@ -134,7 +106,32 @@ var getGeoData = function (cityName) {
         });
 };
 
+// function to create the navigation bar
+var createNavBar = function () {
+    
+    var navBar = document.createElement("nav");
+    navBar.classList.add('navbar', 'is-primary');
+    navBar.setAttribute("role", "navigation");
+    navBar.setAttribute("aria-label", "main-navigation");
+    navBar.innerHTML = "<div class='navbar-brand'>" +
+    "<a class='navbar-item page-font' href='/'>Ready?</a>" +
 
+    "<div class='navbar-start'> </div>" +
+
+    "<div class='navbar-end'>" +
+        "<div class='navbar-item'>" +
+        " <form id='nav-form'>" +
+        "<input class='input is-rounded' id='nav-city-name' type='text' placeholder='Search'>" +
+        "</form>" +
+        "</div>" +
+    "</div>" +
+"</div>"
+
+    headerContentEl.appendChild(navBar);
+
+};
+
+// function to display events
 var displayEvents = function (eventData) {
 
     console.log(eventData);
@@ -149,6 +146,7 @@ var displayEvents = function (eventData) {
         var columnDiv = document.createElement("div");
         columnDiv.classList.add('column', 'is-3');
         eventsContainerEl.appendChild(columnDiv);
+        
         var eventCard = document.createElement("div");
         eventCard.classList.add('card');
         eventCard.innerHTML = "<div class='card-image'><figure class='image is-4by3'><img src=" + eventData._embedded.events[i].images[0].url + " alt='Placeholder image'></figure></div><div class='content'>Name of event: " + eventData._embedded.events[i].name + " <br> Date of event: " + eventData._embedded.events[i].dates.start.localDate + " <br> Event Type: " + eventData._embedded.events[i]._embedded.venues[0].address.line1 + " <br> Event Type: " + eventData._embedded.events[i].priceRanges[0].min + "-" + eventData._embedded.events[i].priceRanges[0].max + " <br> buy your tickets here: <a href=" + eventData._embedded.events[i].url + ">Click here </a> </div></div>";
@@ -157,27 +155,34 @@ var displayEvents = function (eventData) {
     }
 };
 
+// function to display weather elements
 var displayWeather = function (weatherData) {
+
     console.log(weatherData);
+
     var weatherContainerEl = document.createElement('div');
     weatherContainerEl.classList.add('columns', 'is-mobile', 'is-multiline', 'weather-container');   
     mainContainerEl.appendChild(weatherContainerEl);
-        // loops through objects based on event data we concluded to display
+
+    // loops through objects based on event data we concluded to display
     for (var i = 0; i < weatherData.daily.length; i++) {
+
         var weatherDiv = document.createElement("div");
         weatherDiv.classList.add('column', 'is-3');
         weatherContainerEl.appendChild(weatherDiv);
+
         var weatherCard = document.createElement("div");
         weatherCard.className = "card";
         weatherCard.innerHTML = "<div class='card-image'><figure class='image is-64x64'><img src=http://openweathermap.org/img/wn/" + weatherData.daily[i].weather[0].icon + '@2x.png' + " alt='Placeholder image'></figure></div><div class='content'>Date: " + convertDate(weatherData.daily[i].dt) + " <br> Temperature: " + weatherData.daily[i].temp.min + " - " + weatherData.daily[i].temp.max + " <br> Feels like: " + weatherData.daily[i].feels_like.day + " - " + weatherData.daily[i].feels_like.night + " <br> Humidity: " + weatherData.daily[i].humidity + " <br> UV index: " + weatherData.daily[i].uvi + " <br> Description: " + weatherData.daily[i].weather[0].description + "</div></div>";
 
         weatherDiv.appendChild(weatherCard);
     }
+
     mainContainerEl.prepend(weatherContainerEl);
 
 };
 
-
+// delegate search submit to landing page
 searchBox.addEventListener("submit", function (event) {
     event.preventDefault();
     // converts city name to lower case
@@ -189,6 +194,7 @@ searchBox.addEventListener("submit", function (event) {
     console.log(cityName);
 });
 
+// delgate search submit to navigation bar in header
 headerContentEl.addEventListener('submit', function(event) {
     event.preventDefault();
 
