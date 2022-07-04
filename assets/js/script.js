@@ -5,9 +5,36 @@ var cityInputEl = document.querySelector('#city-input');
 var cityContainerEl = document.querySelector('#city-container');
 var mainContainerEl = document.querySelector('#main-container');
 var headerContentEl = document.querySelector('#header');
+var buttonsContainer = document.querySelector('#buttons-container');
+
+var history = [];
+
+// function to save recently searched zipcodes
+var saveHistory = function() {
+
+    localStorage.setItem("history", JSON.stringify(history));
+
+}
+
+// function to load history from local storage
+var loadHistory = function() {
+
+    var savedHistory = localStorage.getItem("history");
+
+    if(!savedHistory) {
+
+        console.log("no history found")
+        return false;
+    }
+
+    savedHistory = JSON.parse(savedHistory);
+
+    console.log(savedHistory);
+}
 
 // function to convert unix time to a date
 var convertDate = function (unixInput) {
+
     var milliseconds = unixInput * 1000;
     var dateObject = new Date(milliseconds);
     var parseDateObject = dateObject.toLocaleDateString();
@@ -16,9 +43,11 @@ var convertDate = function (unixInput) {
 
 // function to remove all parents children
 var removeChildren = function (parent) {
+
     while(parent.firstChild) {
       parent.removeChild(parent.firstChild);
     }
+
   }
 
 // function to get weather info from location
@@ -87,6 +116,17 @@ var getEventsApi = function (city, lon, lat) {
 
             createNavBar();
 
+            var historyObject = {
+
+                city: city,
+                lat: lat, 
+                lon: lon
+            }
+
+            history.push({"city": city, "lat": lat, "lon": lon})
+
+            saveHistory();
+
         });
         
         
@@ -110,10 +150,12 @@ var getGeoData = function (cityName) {
                 if (data === undefined || data.length == 0) {
 
                     Bulma().alert({
+
                         type: 'danger',
                         title: 'Error',
                         body: 'Location not found',
                         confirm: 'Ok',
+
                     });
                     return false;
 
@@ -312,6 +354,13 @@ var displayWeather = function (weatherData) {
 
 };
 
+// function to generate history buttons
+var createButtons = function(history) {
+
+   loadHistory();
+
+}
+
 // delegate search submit to landing page
 searchBox.addEventListener("submit", function (event) {
     event.preventDefault();
@@ -337,3 +386,4 @@ headerContentEl.addEventListener('submit', function(event) {
 
 });
 
+createButtons();
