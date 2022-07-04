@@ -108,6 +108,8 @@ var getGeoData = function (cityName) {
 
 // function to create the navigation bar
 var createNavBar = function () {
+
+    removeChildren(headerContentEl);
     
     var navBar = document.createElement("nav");
     navBar.classList.add('navbar', 'is-primary');
@@ -115,8 +117,6 @@ var createNavBar = function () {
     navBar.setAttribute("aria-label", "main-navigation");
     navBar.innerHTML = "<div class='navbar-brand'>" +
     "<a class='navbar-item page-font' href='/'>Ready?</a>" +
-
-    "<div class='navbar-start'> </div>" +
 
     "<div class='navbar-end'>" +
         "<div class='navbar-item'>" +

@@ -7,12 +7,15 @@ body {
 }
 
 .page-font {
+
     font-family: 'Poppins', sans-serif;
+
 }
 
 .main-container {
 
     background-color: pink;
+
 }
 
 .title-font {
@@ -41,4 +44,9 @@ body {
 
 .weather-container {
     margin: 20px;
+}
+
+.navbar-end {
+
+    text-align: left;
 }
