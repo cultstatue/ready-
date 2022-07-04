@@ -7,12 +7,13 @@ var mainContainerEl = document.querySelector('#main-container');
 var headerContentEl = document.querySelector('#header');
 var buttonsContainer = document.querySelector('#buttons-container');
 
-var history = [];
+var historyArray = []
 
 // function to save recently searched zipcodes
 var saveHistory = function() {
 
-    localStorage.setItem("history", JSON.stringify(history));
+
+    localStorage.setItem("history", JSON.stringify(historyArray));
 
 }
 
@@ -121,12 +122,14 @@ var getEventsApi = function (city, lon, lat) {
                 city: city,
                 lat: lat, 
                 lon: lon
+
             }
 
-            history.push({"city": city, "lat": lat, "lon": lon})
+            historyArray.push(historyObject);
 
             saveHistory();
 
+        
         });
         
         
