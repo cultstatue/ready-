@@ -169,7 +169,7 @@ var createNavBar = function () {
     navBar.setAttribute("role", "navigation");
     navBar.setAttribute("aria-label", "main-navigation");
     navBar.innerHTML = "<div class='navbar-brand'>" +
-    "<a class='navbar-item page-font is-size-4' href='/'>Ready?</a>" +
+    "<a class='navbar-item page-font is-size-4' href='https://cultstatue.github.io/ready-/'>Ready?</a>" +
 
     "<div class='navbar-end'>" +
         "<div class='navbar-item'>" +
