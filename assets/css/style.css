@@ -1,6 +1,13 @@
+:root {
+    --primary: #FFCC00;
+    --secondary: pink;
+    --tertiary: #5a66a2;
+}
+
+
 body {
 
-    background-color: white;
+    background-color: var(--secondary);
     height: 100vh;
     color: var(--color-four);
 
@@ -9,19 +16,26 @@ body {
 .page-font {
 
     font-family: 'Poppins', sans-serif;
+    color: var(--tertiary);
+
 
 }
 
 .main-container {
 
-    background-color: pink;
+    background-color: var(--secondary);
 
+}
+
+.bg-color {
+    background-color: pink;
 }
 
 .title-font {
 
     font-family: 'Poppins', sans-serif;
     font-size: 5.0rem;
+    color: var(--tertiary);
 
 }
 
@@ -38,9 +52,19 @@ body {
 
 }
 
+.btn-custom {
+    background-color:#5a66a2;
+    color: white;
+}
+
+.btn-custom:hover {
+    color: #f8f8ffc7;
+}
+
 .search-button {
 
     margin-top: 2px;
+
 }
 
 .events-container {
@@ -55,4 +79,12 @@ body {
 
 .weather-container {
     margin: 20px;
+}
+
+.weather-card {
+    padding: 5px;
+}
+
+footer {
+    background-image: linear-gradient(to top, white 30%, pink 60%);
 }

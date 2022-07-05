@@ -165,7 +165,7 @@ var createNavBar = function () {
     removeChildren(headerContentEl);
     
     var navBar = document.createElement("nav");
-    navBar.classList.add('navbar', 'is-primary');
+    navBar.classList.add('navbar', 'is-transparent', 'is-fixed-top', 'bg-color');
     navBar.setAttribute("role", "navigation");
     navBar.setAttribute("aria-label", "main-navigation");
     navBar.innerHTML = "<div class='navbar-brand'>" +
@@ -191,7 +191,7 @@ var displayEvents = function (eventData) {
     removeChildren(mainContainerEl);
 
     var eventsContainerEl = document.createElement('div');
-    eventsContainerEl.classList.add('columns', 'is-mobile', 'is-multiline', 'events-container');   
+    eventsContainerEl.classList.add('columns', 'is-multiline', 'events-container');   
     mainContainerEl.appendChild(eventsContainerEl);
 
     // loops through objects based on event data we concluded to display
@@ -290,7 +290,7 @@ var displayEvents = function (eventData) {
        cardContent.appendChild(eventPrices);
 
        var buyButton = document.createElement("button");
-       buyButton.classList.add('button', 'is-responsive', 'is-fullwidth', 'is-primary')
+       buyButton.classList.add('button', 'is-responsive', 'is-fullwidth', 'btn-custom', 'mt-1')
 
         if (eventData._embedded.events[i].url === undefined ) {
 
@@ -320,19 +320,28 @@ var displayWeather = function (weatherData) {
     console.log(weatherData);
 
     var weatherContainerEl = document.createElement('div');
-    weatherContainerEl.classList.add('columns', 'is-mobile', 'is-multiline', 'weather-container');   
+    weatherContainerEl.classList.add('columns', 'is-multiline', 'weather-container');   
     mainContainerEl.appendChild(weatherContainerEl);
 
     // loops through objects based on event data we concluded to display
     for (var i = 0; i < weatherData.daily.length; i++) {
 
         var weatherDiv = document.createElement("div");
-        weatherDiv.classList.add('column', 'is-3');
+        weatherDiv.classList.add('column', 'is-3', 'weather-div');
         weatherContainerEl.appendChild(weatherDiv);
 
         var weatherCard = document.createElement("div");
-        weatherCard.className = "card";
-        weatherCard.innerHTML = "<div class='card-image'><figure class='image is-64x64'><img src=http://openweathermap.org/img/wn/" + weatherData.daily[i].weather[0].icon + '@2x.png' + " alt='Placeholder image'></figure></div><div class='content'>Date: " + convertDate(weatherData.daily[i].dt) + " <br> Temperature: " + weatherData.daily[i].temp.min + " - " + weatherData.daily[i].temp.max + " <br> Feels like: " + weatherData.daily[i].feels_like.day + " - " + weatherData.daily[i].feels_like.night + " <br> Humidity: " + weatherData.daily[i].humidity + " <br> UV index: " + weatherData.daily[i].uvi + " <br> Description: " + weatherData.daily[i].weather[0].description + "</div></div>";
+        weatherCard.classList.add('card', 'weather-card');
+        weatherCard.innerHTML = "<div class='card-image has-text-centered'>" + 
+        "<figure class='image is-64x64 is-inline-block'>" +  
+        "<img src=http://openweathermap.org/img/wn/" + weatherData.daily[i].weather[0].icon + '@2x.png' + " alt='Placeholder image'></figure></div>"+
+        "<div class='content'><p class='title is-4 has-text-centered'>" + convertDate(weatherData.daily[i].dt) + "</p>" +
+        " <p class='subtitle is-6'> " + weatherData.daily[i].temp.min + " °F - " + weatherData.daily[i].temp.max + " °F </p>"+ 
+        " <p class='subtitle is-6'> Feels like: " + weatherData.daily[i].feels_like.day + " ° - " + weatherData.daily[i].feels_like.night + " ° </p>" +
+        " <p class='subtitle is-6'> Humidity: " + weatherData.daily[i].humidity + "% </p>"+
+        " <p class='subtitle is-6'> UV index: " + weatherData.daily[i].uvi + 
+        " <p class='subtitle is-6'> " + weatherData.daily[i].weather[0].description + "</p>" + 
+        "</div></div>";
 
         weatherDiv.appendChild(weatherCard);
     }
@@ -359,7 +368,7 @@ var createButtons = function(history) {
     for (i = 0; i < savedHistory.length; i ++) {
 
         var historyButton = document.createElement("button");
-        historyButton.classList.add('button', 'is-fullwidth', 'is-small', 'history-button');
+        historyButton.classList.add('button', 'is-fullwidth', 'is-small', 'history-button', 'btn-custom');
         historyButton.setAttribute('data-lon', savedHistory[i].lon);
         historyButton.setAttribute('data-lat', savedHistory[i].lat);
         historyButton.innerText = savedHistory[i].city;
