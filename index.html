@@ -1,46 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./assets/css/style.css" />
-    <title>P1</title>
-  </head>
+    <title>Project One</title>
 
-  <body class="flex-column bg-light">
-    <header class="mx-auto text-center text-white bg-primary">
-      <h1>Project 1</h1>
-    </header>
-    <main class="weather">
-      <div class="container p-3 row m-1 ">
-        <div class="card justify-content-md-center">
-          <div class="card-body ">
-            <h3 class="card-title">Search for a City: </h3>
-            <form id="user-form" class="form-horizontal my-2">
-            <input type="text" class="form-control my-3" id="city" placeholder="Enter a city" />
-            <button type="button" class="btn btn-primary btn-lg btn-block">Search</button>
-            </form>
-          </div>
-          <ul class="list-group">
-          </ul>
+</head>
+
+<body id="content" class="has-navbar-fixed-top">
+<header id="header"></header>
+    <!-- main section -->
+    <main id="main-container" class="main-container mb-3">
+
+        <div id="intro" class="columns is-centered">
+
+            <div class="intro-box column is-4">
+
+                <h1 class="title title-font">ready?</h1>
+
+                <div id="search-box" class="search-box box">
+
+                    <div class="content is-size-4">
+                        <div class="block">
+                        Ready for an adventure? Afraid of planning around the weather? No worries, <i>ready?</i> has your back!
+                        <br>
+                        </div>
+                        <div class="block">
+                        Type a zip code for any area within the United States below, and get planning!
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        
+                        <form id="user-form">
+
+                            <div class="control" id="user-form">
+                                
+                                <input id="city-input" maxlength="6" class="input" type="number" placeholder="enter a zip code">
+
+                            </div>
+
+                            <div class="field">
+
+                                <div class="control">
+
+                                    <button type="submit" class="button is-fullwidth mt-1 btn-custom" >go!</button>
+
+                                </div>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                    <div id="buttons-container" class="buttons"></div>
+
+                </div>
+
+            </div>
+
         </div>
-      </div>
-      </div>
-      
+
     </main>
+
+    <!--footer-->
+    <footer class="footer">
+
+        <div class="content has-text-centered">
+
+            <p>
+
+                <strong>ready?</strong> is a collaboration between Maddie Doutt, Kenneth Asay, Andrea Flemings. &copy; 2022
+
+            </p>
+
+        </div>
+
+    </footer>
+
+    <!-- import scripts-->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery-ui-touch-punch@0.2.3/jquery.ui.touch-punch.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="./assets/js/BulmaJS-master/dist/bulma.js"></script>
     <script src="./assets/js/script.js"></script>
-  </body>
+</body>
+
 </html>
