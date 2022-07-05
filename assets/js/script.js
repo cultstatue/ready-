@@ -169,7 +169,7 @@ var createNavBar = function () {
     navBar.setAttribute("role", "navigation");
     navBar.setAttribute("aria-label", "main-navigation");
     navBar.innerHTML = "<div class='navbar-brand'>" +
-    "<a class='navbar-item page-font' href='/'>Ready?</a>" +
+    "<a class='navbar-item page-font is-size-4' href='/'>Ready?</a>" +
 
     "<div class='navbar-end'>" +
         "<div class='navbar-item'>" +
@@ -193,6 +193,15 @@ var displayEvents = function (eventData) {
     var eventsContainerEl = document.createElement('div');
     eventsContainerEl.classList.add('columns', 'is-multiline', 'events-container');   
     mainContainerEl.appendChild(eventsContainerEl);
+
+    var eventsTitleDiv = document.createElement("div");
+    eventsTitleDiv.classList.add('column', 'is-12');
+    eventsContainerEl.appendChild(eventsTitleDiv);
+
+    var eventsTitle = document.createElement('h1');
+    eventsTitle.classList.add('title', 'event-title', 'page-font', 'is-size-1');
+    eventsTitle.innerText = "events";
+    eventsTitleDiv.appendChild(eventsTitle);
 
     // loops through objects based on event data we concluded to display
     for (var i = 0; i < eventData._embedded.events.length; i++) {
@@ -323,6 +332,15 @@ var displayWeather = function (weatherData) {
     weatherContainerEl.classList.add('columns', 'is-multiline', 'weather-container');   
     mainContainerEl.appendChild(weatherContainerEl);
 
+    var weatherTitleDiv = document.createElement("div");
+    weatherTitleDiv.classList.add('column', 'is-12');
+    weatherContainerEl.appendChild(weatherTitleDiv);
+
+    var weatherTitle = document.createElement('h1');
+    weatherTitle.classList.add('title', 'event-title', 'page-font', 'is-size-1');
+    weatherTitle.innerText = "weather";
+    weatherTitleDiv.appendChild(weatherTitle);
+
     // loops through objects based on event data we concluded to display
     for (var i = 0; i < weatherData.daily.length; i++) {
 
@@ -336,11 +354,7 @@ var displayWeather = function (weatherData) {
         "<figure class='image is-64x64 is-inline-block'>" +  
         "<img src=http://openweathermap.org/img/wn/" + weatherData.daily[i].weather[0].icon + '@2x.png' + " alt='Placeholder image'></figure></div>"+
         "<div class='content'><p class='title is-4 has-text-centered'>" + convertDate(weatherData.daily[i].dt) + "</p>" +
-        " <p class='subtitle is-6'> " + weatherData.daily[i].temp.min + " °F - " + weatherData.daily[i].temp.max + " °F </p>"+ 
-        " <p class='subtitle is-6'> Feels like: " + weatherData.daily[i].feels_like.day + " ° - " + weatherData.daily[i].feels_like.night + " ° </p>" +
-        " <p class='subtitle is-6'> Humidity: " + weatherData.daily[i].humidity + "% </p>"+
-        " <p class='subtitle is-6'> UV index: " + weatherData.daily[i].uvi + 
-        " <p class='subtitle is-6'> " + weatherData.daily[i].weather[0].description + "</p>" + 
+        " <p class='subtitle is-5 has-text-centered strong'> " + weatherData.daily[i].temp.min + "° F - " + weatherData.daily[i].temp.max + "° F , "+ weatherData.daily[i].weather[0].description + "</p>" +
         "</div></div>";
 
         weatherDiv.appendChild(weatherCard);
