@@ -17,22 +17,6 @@ var saveHistory = function() {
 
 }
 
-// function to load history from local storage
-var loadHistory = function() {
-
-    var savedHistory = localStorage.getItem("history");
-
-    if(!savedHistory) {
-
-        console.log("no history found")
-        return false;
-    }
-
-    savedHistory = JSON.parse(savedHistory);
-
-    console.log(savedHistory);
-}
-
 // function to convert unix time to a date
 var convertDate = function (unixInput) {
 
@@ -360,7 +344,28 @@ var displayWeather = function (weatherData) {
 // function to generate history buttons
 var createButtons = function(history) {
 
-   loadHistory();
+    var savedHistory = localStorage.getItem("history");
+
+    if(!savedHistory) {
+
+        console.log("no history found")
+        return false;
+    };
+
+    savedHistory = JSON.parse(savedHistory);
+
+    console.log(savedHistory);
+
+    for (i = 0; i < savedHistory.length; i ++) {
+
+        var historyButton = document.createElement("button");
+        historyButton.classList.add('button', 'is-fullwidth', 'is-small', 'history-button');
+        historyButton.setAttribute('data-lon', savedHistory[i].lon);
+        historyButton.setAttribute('data-lat', savedHistory[i].lat);
+        historyButton.innerText = savedHistory[i].city;
+
+        buttonsContainer.appendChild(historyButton);
+    }
 
 }
 
@@ -372,7 +377,6 @@ searchBox.addEventListener("submit", function (event) {
     //getEventsApi(cityName);
     getGeoData(cityName);
 
-    console.log(searchBox);
     console.log(cityName);
 });
 
@@ -390,3 +394,19 @@ headerContentEl.addEventListener('submit', function(event) {
 });
 
 createButtons();
+
+// delegate click events to history buttons
+
+buttonsContainer.addEventListener("click", function (event) {
+
+    if(event.target.matches(".history-button")) {
+
+        var city = event.target.textContent;
+        var lat = event.target.getAttribute('data-lat');
+        var lon = event.target.getAttribute('data-lon');
+
+        getEventsApi(city, lon, lat);
+    }
+
+
+})

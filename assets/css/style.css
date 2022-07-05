@@ -38,6 +38,10 @@ body {
 
 }
 
+.search-button {
+
+    margin-top: 2px;
+}
 
 .events-container {
     margin: 20px;
