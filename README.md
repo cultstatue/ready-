@@ -24,9 +24,12 @@ ready? Is an application made to simplify the planning process of going out.
 
 ## Screenshots of the website
 
-![ready?](../assets/images/scSHot-1.png)
-![ready?](../assets/images/scShot-2.png)
-![ready?](../assets/images/scShot-3.png)
+<img width="1440" alt="scSHot-1" src="https://user-images.githubusercontent.com/36746822/177440649-5d6ba353-dcd7-45b4-bf94-27d0f6937de0.png">
+<img width="1440" alt="scShot-2" src="https://user-images.githubusercontent.com/36746822/177440640-8f8c66fa-c0cd-4d89-8c8a-89f7aee4b703.png">
+<img width="1440" alt="scSHot-3" src="https://user-images.githubusercontent.com/36746822/177440644-c5394a59-e2b8-4a5e-b191-44e8dd06f32f.png">
+
+
+
 
 ## Demo
 ![ready?](https://drive.google.com/file/d/1mGfxauPMindl6h3sKChec8O6bY74K5di/view)
