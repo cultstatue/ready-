@@ -36,8 +36,11 @@ ready? Is an application made to simplify the planning process of going out.
 
 ## Resources
 
-
-
+Openweather One Call 1.0 API
+Openweather Geocoding API
+Ticketmaster Discovery API
+Bulma CSS
+Bulma JS
 
 
 
