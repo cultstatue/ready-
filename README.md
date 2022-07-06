@@ -24,9 +24,9 @@ ready? Is an application made to simplify the planning process of going out.
 
 ## Screenshots of the website
 
-![ready?](../Project-1/assets/images/scSHot-1.png)
-![ready?](../Project-1/assets/images/scShot-2.png)
-![ready?](../Project-1/assets/images/scShot-3.png)
+![ready?](../assets/images/scSHot-1.png)
+![ready?](../assets/images/scShot-2.png)
+![ready?](../assets/images/scShot-3.png)
 
 ## Demo
 ![ready?](https://drive.google.com/file/d/1mGfxauPMindl6h3sKChec8O6bY74K5di/view)
