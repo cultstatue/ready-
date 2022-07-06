@@ -1,5 +1,3 @@
-# Project-1
-
 # ready?
 ready? Is an application made to simplify the planning process of going out.
 
