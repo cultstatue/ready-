@@ -32,7 +32,7 @@ ready? Is an application made to simplify the planning process of going out.
 
 
 ## Demo
-![ready?](https://drive.google.com/file/d/1mGfxauPMindl6h3sKChec8O6bY74K5di/view)
+https://drive.google.com/file/d/1mGfxauPMindl6h3sKChec8O6bY74K5di/view
 
 
 
